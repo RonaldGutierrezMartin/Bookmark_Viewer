@@ -1,0 +1,3 @@
+"background.service_worker":{
+        "scripts":["content_script.js"]
+    }

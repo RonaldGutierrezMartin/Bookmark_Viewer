@@ -1,0 +1,17 @@
+{
+    "name": "Webloteca",
+    "description": "Sincroniza los marcadores de Chrome con la base de datos",
+    "version": "1.0",
+    "manifest_version":3,
+    "action":{
+        "default_popup":"popup.html"
+    },
+    "permissions":[
+        "bookmarks"
+    ],
+    "background.service_worker":{
+        "scripts":["background.js"]
+    }
+
+
+}
