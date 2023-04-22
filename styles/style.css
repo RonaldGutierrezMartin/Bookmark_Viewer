@@ -18,7 +18,7 @@ main{
     flex-wrap: wrap;
     justify-content: center;
 }
-.tarjeta{
+.aTarjeta{
     display: flex;
     flex-direction: row;
     align-items: center;

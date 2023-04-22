@@ -1,14 +1,11 @@
-const boton = document.querySelector("button");
-const botonTools = document.querySelector("#botonTools");
+
+const botonTools = document.querySelector("#botonAll");
 const templatePlantilla = document.querySelector("#templatePlantilla");
 const fragmento = document.createDocumentFragment();
 const templatePlantillaClon = templatePlantilla.cloneNode(true);
 const mainContendor = document.querySelector("main");
-botonTools.addEventListener("click", () => {
-  //   chrome.bookmarks.create({
-  //     title: "G4",
-  //     url: "https://es.wikipedia.org/wiki/Wikipedia:Portada",
-  //   });
+botonTools.addEventListener("click",()=> {
+    
 
   //El metodo getTree me devuelve una promesa por lo que la almaceno en una variable y la analizo
   miPromesa = chrome.bookmarks.getTree();
@@ -20,7 +17,6 @@ botonTools.addEventListener("click", () => {
       
 
       // console.log(templatePlantillaClon);
-
       // const array = resultado[0];
       // console.log(resultado);
       // console.log(array.children[0].children[20].title);
@@ -30,7 +26,7 @@ botonTools.addEventListener("click", () => {
       resultado.forEach((arrayAbuelo) => {
         arrayAbuelo.children.forEach((arrayHijo) => {
           arrayHijo.children.forEach((i) => {
-            console.log(i);
+            
             const templatePlantillaClon = templatePlantilla.content.cloneNode(true);
             templatePlantillaClon.querySelector(".tituloTarjeta").textContent =
               i.title;
