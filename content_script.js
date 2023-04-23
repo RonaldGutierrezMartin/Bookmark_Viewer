@@ -1,45 +1,60 @@
-
 const botonTools = document.querySelector("#botonAll");
 const templatePlantilla = document.querySelector("#templatePlantilla");
 const fragmento = document.createDocumentFragment();
 const templatePlantillaClon = templatePlantilla.cloneNode(true);
 const mainContendor = document.querySelector("main");
-botonTools.addEventListener("click",()=> {
-    
+const cuerpo = document.querySelector("body");
 
-  //El metodo getTree me devuelve una promesa por lo que la almaceno en una variable y la analizo
-  miPromesa = chrome.bookmarks.getTree();
-  // Ejecutamos la promesa y accedemos al resultado del array
-  miPromesa
-    .then((resultado) => {
-      const templatePlantilla = document.querySelector("#templatePlantilla");
-      const fragmento = document.createDocumentFragment();
-      
+//Implemeto la delegacion de eventos
+cuerpo.addEventListener("click", (evento) => {
 
-      // console.log(templatePlantillaClon);
-      // const array = resultado[0];
-      // console.log(resultado);
-      // console.log(array.children[0].children[20].title);
-      // const objetoWeb = array.children[0].children[20];
-      // console.log(objetoWeb);
+  if (evento.target.id === "botonAll") {
+    //El metodo getTree me devuelve una promesa por lo que la almaceno en una variable y la analizo
+    miPromesa = chrome.bookmarks.getTree();
+    // Ejecutamos la promesa y accedemos al resultado del array
+    miPromesa
+      .then((resultado) => {
+        const templatePlantilla = document.querySelector("#templatePlantilla");
+        const fragmento = document.createDocumentFragment();
 
-      resultado.forEach((arrayAbuelo) => {
-        arrayAbuelo.children.forEach((arrayHijo) => {
-          arrayHijo.children.forEach((i) => {
-            
-            const templatePlantillaClon = templatePlantilla.content.cloneNode(true);
-            templatePlantillaClon.querySelector(".tituloTarjeta").textContent =
-              i.title;
-            fragmento.appendChild(templatePlantillaClon);
-            
+        // console.log(templatePlantillaClon);
+        // const array = resultado[0];
+        // console.log(resultado);
+        // console.log(array.children[0].children[20].title);
+        // const objetoWeb = array.children[0].children[20];
+        // console.log(objetoWeb);
+
+        resultado.forEach((arrayAbuelo) => {
+          arrayAbuelo.children.forEach((arrayHijo) => {
+            arrayHijo.children.forEach((i) => {
+              // console.log(i)
+              const templatePlantillaClon =
+                templatePlantilla.content.cloneNode(true);
+              templatePlantillaClon.querySelector(
+                ".tituloTarjeta"
+              ).textContent = i.title;
+              templatePlantillaClon.querySelector(".aTarjeta").href=i.url
+
+              //Accedo al favicon de cualquier web
+              templatePlantillaClon.querySelector(".imagen").src ="https://s2.googleusercontent.com/s2/favicons?domain="+i.url+"&sz=32"
+
+              fragmento.appendChild(templatePlantillaClon);
+            });
           });
         });
-      });
 
-      mainContendor.appendChild(fragmento);
-    })
-    .catch((error) => {
-      // Manejo de errores si la promesa es rechazada
-      console.error(error);
-    });
+        mainContendor.appendChild(fragmento);
+      })
+      .catch((error) => {
+        // Manejo de errores si la promesa es rechazada
+        console.error(error);
+      });
+  }
+
+
+
+
+  if(evento.target.matches(".aTarjeta")){
+    chrome.tabs.create({url:evento.target.href})
+  }
 });

@@ -27,8 +27,9 @@ main{
     height: 35px;
     margin: 5px;
     border-radius: 25px;
+    text-decoration: none;
 }
-.tarjeta img{
+.aTarjeta img{
     
     width: 35px;
     height: 35px;
