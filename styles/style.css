@@ -22,12 +22,13 @@ main{
     display: flex;
     flex-direction: row;
     align-items: center;
-    background-color: aqua;
+    background-color: white;
     width: 155px;
     height: 35px;
     margin: 5px;
     border-radius: 25px;
     text-decoration: none;
+    padding: 0px;
 }
 .aTarjeta img{
     

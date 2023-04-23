@@ -36,7 +36,7 @@ cuerpo.addEventListener("click", (evento) => {
               templatePlantillaClon.querySelector(".aTarjeta").href=i.url
 
               //Accedo al favicon de cualquier web
-              templatePlantillaClon.querySelector(".imagen").src ="https://s2.googleusercontent.com/s2/favicons?domain="+i.url+"&sz=32"
+              templatePlantillaClon.querySelector(".imagen").src ="https://s2.googleusercontent.com/s2/favicons?domain="+i.url+"&sz=128"
 
               fragmento.appendChild(templatePlantillaClon);
             });
@@ -51,10 +51,14 @@ cuerpo.addEventListener("click", (evento) => {
       });
   }
 
-
-
-
-  if(evento.target.matches(".aTarjeta")){
+  //ESTA FALLANDO AL TOCAR LE LINK PQ EL evento.target.href solo lo 
+  //tiene el enlace, no la imagen ni el parrafo
+  //UNA SOLUCION SERIA AÑADIRLE EL HREF A ELLOS TAMB 
+  if(evento.target.matches(".aTarjeta") || evento.target.matches(".imagen") || evento.target.matches(".tituloTarjeta")){
     chrome.tabs.create({url:evento.target.href})
   }
+
+  
 });
+
+
