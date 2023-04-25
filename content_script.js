@@ -54,6 +54,8 @@ cuerpo.addEventListener("click", (evento) => {
   //ESTA FALLANDO AL TOCAR LE LINK PQ EL evento.target.href solo lo 
   //tiene el enlace, no la imagen ni el parrafo
   //UNA SOLUCION SERIA AÑADIRLE EL HREF A ELLOS TAMB 
+  
+  //Uso la api tabs para abrir el enlace en el navegador
   if(evento.target.matches(".aTarjeta") || evento.target.matches(".imagen") || evento.target.matches(".tituloTarjeta")){
     chrome.tabs.create({url:evento.target.href})
   }
