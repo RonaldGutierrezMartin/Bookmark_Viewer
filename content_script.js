@@ -36,7 +36,7 @@ cuerpo.addEventListener("click", (evento) => {
               templatePlantillaClon.querySelector(".aTarjeta").href=i.url
 
               //Accedo al favicon de cualquier web
-              templatePlantillaClon.querySelector(".imagen").src ="https://s2.googleusercontent.com/s2/favicons?domain="+i.url+"&sz=128"
+              templatePlantillaClon.querySelector(".imagen").src ="https://s2.googleusercontent.com/s2/favicons?domain="+i.url+"&sz=32"
 
               fragmento.appendChild(templatePlantillaClon);
             });

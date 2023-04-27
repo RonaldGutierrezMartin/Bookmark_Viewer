@@ -2,7 +2,7 @@ body{
     /* background-color: rgb(59, 59, 59); */
     
     width: 500px;
-    height: 1000px;
+    height: 500px;
 }
 header{
     background-color: blueviolet;
@@ -23,7 +23,7 @@ main{
     display: flex;
     flex-direction: row;
     align-items: center;
-    background-color: rgba(52, 52, 52, 0.2);
+    background-color: rgba(52, 52, 52, 1);
     width: 155px;
     height: 35px;
     margin: 5px;
@@ -39,4 +39,7 @@ main{
     border-radius: 50px;
     margin-left: 5px;
     margin-right: 5px;
+}
+.aTarjeta p{
+    color: white;
 }
