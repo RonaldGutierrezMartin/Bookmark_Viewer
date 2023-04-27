@@ -24,7 +24,7 @@ function insertarEnExtension(arrayCarpeta) {
 
 function peticionAPI(indexCarpeta) {
   //Tools:0; Learnig:1; Resources:2; Entertaiment:3
-  
+
   //El metodo getTree me devuelve una promesa por lo que la almaceno en una variable y la analizo
   miPromesa = chrome.bookmarks.getTree();
   // Ejecutamos la promesa y accedemos al resultado del array
@@ -42,45 +42,59 @@ function peticionAPI(indexCarpeta) {
     });
 }
 
+function peticionAPIAll() {
+  //Tools:0; Learnig:1; Resources:2; Entertaiment:3
+
+  //El metodo getTree me devuelve una promesa por lo que la almaceno en una variable y la analizo
+  miPromesa = chrome.bookmarks.getTree();
+  // Ejecutamos la promesa y accedemos al resultado del array
+  miPromesa
+    .then((resultado) => {
+      //CarpetasPadres.OtrosMarcadores.Tools.ArrayConMarcadoresDeTools
+      let arrayCarpeta = []
+      for(i=0;i<=3;i++){
+        
+        arrayCarpeta = arrayCarpeta.concat(resultado[0].children[1].children[i].children)
+      }
+      
+      insertarEnExtension(arrayCarpeta);
+    })
+    .catch((error) => {
+      // Manejo de errores si la promesa es rechazada
+      console.error(error);
+    });
+}
+
+function peticionAPISoloFav(){
+  //El metodo getTree me devuelve una promesa por lo que la almaceno en una variable y la analizo
+  miPromesa = chrome.bookmarks.getTree();
+  // Ejecutamos la promesa y accedemos al resultado del array
+  miPromesa
+    .then((resultado) => {
+      //CarpetasPadres.OtrosMarcadores.Tools.ArrayConMarcadoresDeTools
+      const arrayCarpeta = resultado[0].children[0].children;
+      console.log(arrayCarpeta)
+      insertarEnExtension(arrayCarpeta);
+    })
+    .catch((error) => {
+      // Manejo de errores si la promesa es rechazada
+      console.error(error);
+    });
+}
+
 //Implemeto la delegacion de eventos
 cuerpo.addEventListener("click", (evento) => {
+
+  //BOTON FAVORITOS
+
   if (evento.target.id === "botonFav") {
-    //El metodo getTree me devuelve una promesa por lo que la almaceno en una variable y la analizo
-    miPromesa = chrome.bookmarks.getTree();
-    // Ejecutamos la promesa y accedemos al resultado del array
-    miPromesa
-      .then((resultado) => {
-        const templatePlantilla = document.querySelector("#templatePlantilla");
-        const fragmento = document.createDocumentFragment();
+    peticionAPISoloFav()  
+  }
 
-        resultado.forEach((arrayAbuelo) => {
-          arrayAbuelo.children.forEach((arrayHijo) => {
-            arrayHijo.children.forEach((i) => {
-              // console.log(i)
-              const templatePlantillaClon =
-                templatePlantilla.content.cloneNode(true);
-              templatePlantillaClon.querySelector(
-                ".tituloTarjeta"
-              ).textContent = i.title;
-              templatePlantillaClon.querySelector(".aTarjeta").href = i.url;
+  //BOTON ALL
 
-              //Accedo al favicon de cualquier web
-              templatePlantillaClon.querySelector(".imagen").src =
-                "https://s2.googleusercontent.com/s2/favicons?domain=" +
-                i.url +
-                "&sz=32";
-
-              fragmento.appendChild(templatePlantillaClon);
-            });
-          });
-        });
-        mainContendor.innerHTML = "";
-        mainContendor.appendChild(fragmento);
-      })
-      .catch((error) => {
-        // Manejo de errores si la promesa es rechazada
-        console.error(error);
-      });
+  if (evento.target.id === "botonAll") {
+    peticionAPIAll()  
   }
 
   //BOTON TOOLS
