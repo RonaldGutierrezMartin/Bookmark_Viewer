@@ -4,6 +4,7 @@ const templatePlantillaClon = templatePlantilla.cloneNode(true);
 const mainContendor = document.querySelector("main");
 const cuerpo = document.querySelector("body");
 const inputBuscar = document.querySelector(".inputBuscar")
+const aTarjeta  =document.querySelector(".aTarjeta")
 function insertarEnExtension(arrayCarpeta) {
   const fragmento = document.createDocumentFragment();
   arrayCarpeta.forEach((i) => {
@@ -161,20 +162,26 @@ cuerpo.addEventListener("click", (evento) => {
     chrome.tabs.create({ url: "chrome://bookmarks/" });
   }
 
-  
-
   //ESTA FALLANDO AL TOCAR LE LINK PQ EL evento.target.href solo lo
   //tiene el enlace, no la imagen ni el parrafo
   //UNA SOLUCION SERIA AÑADIRLE EL HREF A ELLOS TAMB
 
   //Uso la api tabs para abrir el enlace en el navegador
-  if (
-    evento.target.matches(".aTarjeta") ||
-    evento.target.matches(".imagen") ||
-    evento.target.matches(".tituloTarjeta")
-  ) {
+  
+  
+  if (evento.target.matches(".aTarjeta")) {
+    
     chrome.tabs.create({ url: evento.target.href });
   }
+
+  if (evento.target.matches(".imagen") ||
+  evento.target.matches(".tituloTarjeta")){
+    
+    console.log(evento.target.parentNode)
+    chrome.tabs.create({ url: evento.target.parentNode.href });
+  }
+
+  
 });
 
 
@@ -182,7 +189,6 @@ cuerpo.addEventListener("click", (evento) => {
 
 inputBuscar.addEventListener("input", ()=>{
 
-  console.log(inputBuscar.value)
   buscar(inputBuscar.value)
 })
   
