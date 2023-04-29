@@ -47,4 +47,42 @@ main{
 }
 .aTarjeta p{
     color: white;
+    
+}
+.botonesMenu{
+    width: 40px;
+    height: 40px;
+    background-size: cover;
+    cursor: pointer;
+    border: none;
+    margin: 5px;
+    border-radius: 10px;
+}
+#botonFav{
+    background-image: url(../img/corazon.gif);
+    filter: hue-rotate(180deg);
+}
+#botonAll{
+    background-image: url(../img/vegetal.gif);
+    
+}
+#botonTools{
+    background-image: url(../img/herramientas-para-reparar.gif);
+    filter: hue-rotate(90deg);
+}
+#botonLearning{
+    background-image: url(../img/libro.gif);
+    filter: hue-rotate(280deg);
+}
+#botonResour{
+    background-image: url(../img/almacen.gif);
+    filter: hue-rotate(120deg);
+}
+#botonEnterta{
+    background-image: url(../img/television.gif);
+    filter: hue-rotate(50deg);
+}
+#botonAdmin{
+    background-image: url(../img/fabrica.gif);
+    filter: hue-rotate(220deg);
 }
