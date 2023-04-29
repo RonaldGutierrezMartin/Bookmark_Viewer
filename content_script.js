@@ -3,7 +3,7 @@ const templatePlantilla = document.querySelector("#templatePlantilla");
 const templatePlantillaClon = templatePlantilla.cloneNode(true);
 const mainContendor = document.querySelector("main");
 const cuerpo = document.querySelector("body");
-
+const inputBuscar = document.querySelector(".inputBuscar")
 function insertarEnExtension(arrayCarpeta) {
   const fragmento = document.createDocumentFragment();
   arrayCarpeta.forEach((i) => {
@@ -82,6 +82,36 @@ function peticionAPISoloFav(){
     });
 }
 
+function buscar(titulo){
+
+  //Tools:0; Learnig:1; Resources:2; Entertaiment:3
+  miPromesa = chrome.bookmarks.getTree();
+  // Ejecutamos la promesa y accedemos al resultado del array
+  miPromesa
+    .then((resultado) => {
+      //CarpetasPadres.OtrosMarcadores.Tools.ArrayConMarcadoresDeTools
+      let arrayCarpeta = []
+      for(i=0;i<=3;i++){
+        
+        arrayCarpeta = arrayCarpeta.concat(resultado[0].children[1].children[i].children)
+      }
+      let elementosEncontrados =[]
+      arrayCarpeta.forEach(i =>{
+        if (i.title.includes(titulo)){
+          elementosEncontrados.push(i)
+        }
+      })
+
+      insertarEnExtension(elementosEncontrados);
+    })
+    .catch((error) => {
+      // Manejo de errores si la promesa es rechazada
+      console.error(error);
+    });
+
+}
+
+
 //Implemeto la delegacion de eventos
 cuerpo.addEventListener("click", (evento) => {
 
@@ -131,6 +161,8 @@ cuerpo.addEventListener("click", (evento) => {
     chrome.tabs.create({ url: "chrome://bookmarks/" });
   }
 
+  
+
   //ESTA FALLANDO AL TOCAR LE LINK PQ EL evento.target.href solo lo
   //tiene el enlace, no la imagen ni el parrafo
   //UNA SOLUCION SERIA AÑADIRLE EL HREF A ELLOS TAMB
@@ -144,3 +176,14 @@ cuerpo.addEventListener("click", (evento) => {
     chrome.tabs.create({ url: evento.target.href });
   }
 });
+
+
+//BOTON BUSCAR
+
+inputBuscar.addEventListener("input", ()=>{
+
+  console.log(inputBuscar.value)
+  buscar(inputBuscar.value)
+})
+  
+

@@ -8,11 +8,16 @@ header{
     background-color: blueviolet;
     margin: 10px 0px 15px 0px;
 }
-nav{
+nav .busqueda{
+    background-color: aquamarine;
+    width: 100%;
+    display: flex;
+    justify-content: end;
+}
+nav .botones{
     display: flex;
     flex-direction: row;
 }
-
 main{
     display: flex;
     flex-direction: row;
