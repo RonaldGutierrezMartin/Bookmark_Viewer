@@ -97,7 +97,7 @@ function buscar(titulo){
       }
       let elementosEncontrados =[]
       arrayCarpeta.forEach(i =>{
-        if (i.title.includes(titulo)){
+        if (i.title.toLowerCase().includes(titulo.toLowerCase())){
           elementosEncontrados.push(i)
         }
       })
