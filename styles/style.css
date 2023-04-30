@@ -1,7 +1,10 @@
-
+/* @font-face {
+    font-family: "mononoki";
+    src: url(../font/mononoki-Bold.otf);
+} */
 body{
-    /* background-color: rgb(59, 59, 59); */
     
+    /* font-family: "nononoki"; */
     width: 500px;
     height: 500px;
     padding: 0px;
@@ -12,7 +15,7 @@ body{
 header{
     
     margin: 10px 0px 15px 0px;
-
+    
 }
 hr{
     color:rgb(64, 63, 63); 
@@ -46,6 +49,7 @@ form{
     background-color: rgb(224, 220, 220);
     font-size: 15px;
     font-weight: bold;
+    /* font-family: 'mononoki'; */
 }
 .inputBuscar::placeholder{
     
@@ -101,7 +105,7 @@ main{
     margin-right: 5px;
     margin-right: 2.5px;
     font-weight: 500;
-    
+    /* font-family: 'mononoki'; */
 }
 .botonesMenu{
     width: 40px;
