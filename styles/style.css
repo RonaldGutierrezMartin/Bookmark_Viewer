@@ -6,6 +6,7 @@ body{
     height: 500px;
     padding: 0px;
     margin: 0px;
+    background-color: rgb(36, 36, 36);
     
 }
 header{
@@ -13,13 +14,20 @@ header{
     margin: 10px 0px 15px 0px;
 
 }
+hr{
+    color:rgb(64, 63, 63); 
+    height: 0.1px;
+    margin: 5px;
+    border-style: dashed;
+    
+}
 nav .busqueda{
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     width: 100%;
     display: flex;
     justify-content: end;
-    background-color: rgb(141, 46, 46);
+    background-color: rgb(36, 36, 36);
     
 }
 form{
@@ -30,12 +38,14 @@ form{
 }
 .inputBuscar{
     width: 200px;
-    height: 25px;
+    height: 30px;
     border-radius: 7px;
     padding: 0px 8px;
     border: 1px solid rgba(0, 0, 0, 0.5);
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
-
+    background-color: rgb(224, 220, 220);
+    font-size: 15px;
+    font-weight: bold;
 }
 .inputBuscar::placeholder{
     
@@ -48,11 +58,11 @@ header{
     margin: 0px;
 }
 nav .botones{
-    
+    padding-top: 5px;
     display: flex;
     flex-direction: row;
     justify-content: center;
-    background-color: rgb(29, 28, 28);
+    background-color: rgb(36, 36, 36);
 }
 main{
     display: flex;
@@ -64,15 +74,15 @@ main{
     display: flex;
     flex-direction: row;
     align-items: center;
-    background-color: rgb(22, 22, 22);
+    background-color: rgb(51, 50, 50);
     width: max-content;
     height: max-content;
     margin: 5px;
     border-radius: 25px;
     text-decoration: none;
-    padding: 2px,5px;
+    padding: 0px,5px;
     justify-content: center;
-    
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
 
 }
 .aTarjeta img{
@@ -89,8 +99,6 @@ main{
     color: rgb(224, 220, 220);
     word-wrap: break-word;
     margin-right: 5px;
-    /* overflow: hidden;
-    text-overflow: ellipsis; */
     margin-right: 2.5px;
     font-weight: 500;
     
@@ -114,9 +122,7 @@ main{
     filter: hue-rotate(180deg);
     
 }
-#botonFav:hover{
-    animation-play-state: running;
-}
+
 #botonAll{
     background-image: url(../img/vegetal.gif);
     
@@ -141,3 +147,16 @@ main{
     background-image: url(../img/fabrica.gif);
     filter: hue-rotate(220deg);
 }
+::-webkit-scrollbar{
+    width: 10px;
+} 
+::-webkit-scrollbar-track {
+    background-color: rgb(36, 36, 36);
+  }
+::-webkit-scrollbar-thumb {
+    background-color: rgb(51, 50, 50);
+    border-radius: 20px;
+    border: 1px dashed rgb(97, 97, 97);
+    
+  }
+  
