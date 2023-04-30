@@ -1,22 +1,58 @@
+
 body{
     /* background-color: rgb(59, 59, 59); */
     
     width: 500px;
     height: 500px;
+    padding: 0px;
+    margin: 0px;
+    
 }
 header{
-    background-color: blueviolet;
+    
     margin: 10px 0px 15px 0px;
+
 }
 nav .busqueda{
-    background-color: aquamarine;
+    padding-top: 10px;
+    padding-bottom: 10px;
     width: 100%;
     display: flex;
     justify-content: end;
+    background-color: rgb(141, 46, 46);
+    
+}
+form{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+}
+.inputBuscar{
+    width: 200px;
+    height: 25px;
+    border-radius: 7px;
+    padding: 0px 8px;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+
+}
+.inputBuscar::placeholder{
+    
+    background-image: url(../img/lupa.png);
+    background-size: 17px;
+    background-repeat: no-repeat;
+    
+}
+header{
+    margin: 0px;
 }
 nav .botones{
+    
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    background-color: rgb(29, 28, 28);
 }
 main{
     display: flex;
@@ -28,13 +64,15 @@ main{
     display: flex;
     flex-direction: row;
     align-items: center;
-    background-color: rgba(52, 52, 52, 1);
-    width: 155px;
-    height: 35px;
+    background-color: rgb(22, 22, 22);
+    width: max-content;
+    height: max-content;
     margin: 5px;
     border-radius: 25px;
     text-decoration: none;
-    padding: 0px;
+    padding: 2px,5px;
+    justify-content: center;
+    
 
 }
 .aTarjeta img{
@@ -42,11 +80,19 @@ main{
     width: 20px;
     height: 20px;
     border-radius: 50px;
+    background-color: rgb(255, 255, 255);
     margin-left: 5px;
-    margin-right: 5px;
+    margin-right: 2.5px;
+    
 }
 .aTarjeta p{
-    color: white;
+    color: rgb(224, 220, 220);
+    word-wrap: break-word;
+    margin-right: 5px;
+    /* overflow: hidden;
+    text-overflow: ellipsis; */
+    margin-right: 2.5px;
+    font-weight: 500;
     
 }
 .botonesMenu{
@@ -57,10 +103,19 @@ main{
     border: none;
     margin: 5px;
     border-radius: 10px;
+   
+}
+.botonesMenu:hover{
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+    
 }
 #botonFav{
-    background-image: url(../img/corazon.gif);
+    background-image: url(../img/latido-del-corazon.gif);
     filter: hue-rotate(180deg);
+    
+}
+#botonFav:hover{
+    animation-play-state: running;
 }
 #botonAll{
     background-image: url(../img/vegetal.gif);
@@ -71,11 +126,11 @@ main{
     filter: hue-rotate(90deg);
 }
 #botonLearning{
-    background-image: url(../img/libro.gif);
+    background-image: url(../img/libro2.gif);
     filter: hue-rotate(280deg);
 }
 #botonResour{
-    background-image: url(../img/almacen.gif);
+    background-image: url(../img/paleta.gif);
     filter: hue-rotate(120deg);
 }
 #botonEnterta{
