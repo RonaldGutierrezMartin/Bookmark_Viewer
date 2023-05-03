@@ -114,10 +114,7 @@ main{
     border-radius: 10px;
    
 }
-.botonesMenu:hover{
-    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
-    
-}
+
 #botonFav{
     background-image: url(../img/latido-del-corazon.gif);
     filter: hue-rotate(180deg);

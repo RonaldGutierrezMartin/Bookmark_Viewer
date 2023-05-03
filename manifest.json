@@ -1,6 +1,6 @@
 {
-    "name": "Webloteca",
-    "description": "Sincroniza los marcadores de Chrome con la base de datos",
+    "name": "Bookmark View",
+    "description": "Quick view of google chrome bookmarks ",
     "version": "1.0",
     "manifest_version":3,
     "action":{
@@ -12,6 +12,9 @@
     ],
     "background.service_worker":{
         "scripts":["background.js"]
+    },
+    "icons": {
+        "128": "img/marca-de-libro.png"
     }
 
 
