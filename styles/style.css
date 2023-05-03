@@ -43,7 +43,7 @@ form{
     padding: 0px 8px;
     border: 1px solid rgba(0, 0, 0, 0.5);
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
-    background-color: rgb(224, 220, 220);
+    background-color: rgb(255, 255, 255);
     font-size: 15px;
     font-weight: bold;
     
@@ -105,44 +105,74 @@ main{
     
 }
 .botonesMenu{
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
     background-size: cover;
     cursor: pointer;
     border: none;
     margin: 5px;
     border-radius: 10px;
-   
+    background-color: rgb(36, 36, 36);
+    
 }
 
 #botonFav{
+    background-image: url(../img/latido-del-corazon.png);
+    filter: hue-rotate(180deg);
+    
+}
+#botonFav:hover{
     background-image: url(../img/latido-del-corazon.gif);
     filter: hue-rotate(180deg);
     
 }
 
-#botonAll{
+#botonAll:hover{
     background-image: url(../img/vegetal.gif);
     
 }
-#botonTools{
+#botonAll{
+    background-image: url(../img/vegetal.png);
+    
+}
+#botonTools:hover{
     background-image: url(../img/herramientas-para-reparar.gif);
     filter: hue-rotate(90deg);
 }
-#botonLearning{
+#botonTools{
+    background-image: url(../img/herramientas.png);
+    filter: hue-rotate(90deg);
+}
+#botonLearning:hover{
     background-image: url(../img/libro2.gif);
     filter: hue-rotate(280deg);
 }
-#botonResour{
+#botonLearning{
+    background-image: url(../img/book.png);
+    filter: hue-rotate(280deg);
+}
+#botonResour:hover{
     background-image: url(../img/paleta.gif);
     filter: hue-rotate(120deg);
 }
-#botonEnterta{
+#botonResour{
+    background-image: url(../img/cajas.png);
+    filter: hue-rotate(120deg);
+}
+#botonEnterta:hover{
     background-image: url(../img/television.gif);
     filter: hue-rotate(50deg);
 }
-#botonAdmin{
+#botonEnterta{
+    background-image: url(../img/tv.png);
+    filter: hue-rotate(50deg);
+}
+#botonAdmin:hover{
     background-image: url(../img/fabrica.gif);
+    filter: hue-rotate(220deg);
+}
+#botonAdmin{
+    background-image: url(../img/fabrica.png);
     filter: hue-rotate(220deg);
 }
 ::-webkit-scrollbar{
