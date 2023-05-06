@@ -7,7 +7,6 @@ const inputBuscar = document.querySelector(".inputBuscar")
 const aTarjeta  =document.querySelector(".aTarjeta")
 let BotSelecParaCambio = null
 let BGIMGBotSelParaCamb = null
-let urlPNG
 let urlGIF
 function insertarEnExtension(arrayCarpeta) {
   const fragmento = document.createDocumentFragment();
@@ -116,7 +115,7 @@ function buscar(titulo){
 
 }
 
-function marcadorDeSeleccionado(botonSelecionado, urlPNG,urlGIF){
+function marcadorDeSeleccionado(botonSelecionado,urlGIF){
   
   if(BotSelecParaCambio!==null){
     
@@ -135,18 +134,18 @@ cuerpo.addEventListener("click", (evento) => {
   //BOTON FAVORITOS
 
   if (evento.target.id === "botonFav") {
-    urlPNG  = "url(img/latido-del-corazon.png)"
+    
     urlGIF = "url(img/latido-del-corazon.gif)"
-    marcadorDeSeleccionado(evento.target, urlPNG, urlGIF)
+    marcadorDeSeleccionado(evento.target, urlGIF)
     peticionAPISoloFav()  
   }
 
   //BOTON ALL
 
   if (evento.target.id === "botonAll") {
-    urlPNG  = "url(img/vegetal.png)"
+    
     urlGIF = "url(img/vegetal.gif)"
-    marcadorDeSeleccionado(evento.target, urlPNG, urlGIF)
+    marcadorDeSeleccionado(evento.target, urlGIF)
     peticionAPIAll()  
   }
 
@@ -154,9 +153,9 @@ cuerpo.addEventListener("click", (evento) => {
 
   if (evento.target.id === "botonTools") {
     //Tools:0; Learnig:1; Resources:2; Entertaiment:3
-    urlPNG  = "url(img/herramientas.png)"
+    
     urlGIF = "url(img/herramientas.gif)"
-    marcadorDeSeleccionado(evento.target, urlPNG, urlGIF)
+    marcadorDeSeleccionado(evento.target, urlGIF)
     peticionAPI(0);
   }
 
@@ -164,9 +163,9 @@ cuerpo.addEventListener("click", (evento) => {
 
   if (evento.target.id === "botonLearning") {
     //Tools:0; Learnig:1; Resources:2; Entertaiment:3
-    urlPNG  = "url(img/book.png)"
+    
     urlGIF = "url(img/book.gif)"
-    marcadorDeSeleccionado(evento.target, urlPNG, urlGIF)
+    marcadorDeSeleccionado(evento.target, urlGIF)
     peticionAPI(1);
   }
 
@@ -174,9 +173,9 @@ cuerpo.addEventListener("click", (evento) => {
 
   if (evento.target.id === "botonResour") {
     //Tools:0; Learnig:1; Resources:2; Entertaiment:3
-    urlPNG  = "url(img/cajas.png)"
+    
     urlGIF = "url(img/cajas.gif)"
-    marcadorDeSeleccionado(evento.target, urlPNG, urlGIF)
+    marcadorDeSeleccionado(evento.target, urlGIF)
     peticionAPI(2);
   }
 
@@ -184,18 +183,18 @@ cuerpo.addEventListener("click", (evento) => {
 
   if (evento.target.id === "botonEnterta") {
     //Tools:0; Learnig:1; Resources:2; Entertaiment:3
-    urlPNG  = "url(img/tv.png)"
+    
     urlGIF = "url(img/tv.gif)"
-    marcadorDeSeleccionado(evento.target, urlPNG, urlGIF)
+    marcadorDeSeleccionado(evento.target, urlGIF)
     peticionAPI(3);
   }
 
   //BOTON ADMIN
 
   if (evento.target.id === "botonAdmin") {
-    urlPNG  = "url(img/fabrica.png)"
+    
     urlGIF = "url(img/fabrica.gif)"
-    marcadorDeSeleccionado(evento.target, urlPNG, urlGIF)
+    marcadorDeSeleccionado(evento.target, urlGIF)
     chrome.tabs.create({ url: "chrome://bookmarks/" });
   }
 
