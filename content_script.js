@@ -5,6 +5,10 @@ const mainContendor = document.querySelector("main");
 const cuerpo = document.querySelector("body");
 const inputBuscar = document.querySelector(".inputBuscar")
 const aTarjeta  =document.querySelector(".aTarjeta")
+let BotSelecParaCambio = null
+let BGIMGBotSelParaCamb = null
+let urlPNG
+let urlGIF
 function insertarEnExtension(arrayCarpeta) {
   const fragmento = document.createDocumentFragment();
   arrayCarpeta.forEach((i) => {
@@ -112,6 +116,18 @@ function buscar(titulo){
 
 }
 
+function marcadorDeSeleccionado(botonSelecionado, urlPNG,urlGIF){
+  
+  if(BotSelecParaCambio!==null){
+    
+    BotSelecParaCambio.style.backgroundImage = BGIMGBotSelParaCamb
+  }
+  BotSelecParaCambio = botonSelecionado
+  
+  botonSelecionado.style.backgroundImage = urlGIF
+  
+}
+
 
 //Implemeto la delegacion de eventos
 cuerpo.addEventListener("click", (evento) => {
@@ -119,12 +135,18 @@ cuerpo.addEventListener("click", (evento) => {
   //BOTON FAVORITOS
 
   if (evento.target.id === "botonFav") {
+    urlPNG  = "url(img/latido-del-corazon.png)"
+    urlGIF = "url(img/latido-del-corazon.gif)"
+    marcadorDeSeleccionado(evento.target, urlPNG, urlGIF)
     peticionAPISoloFav()  
   }
 
   //BOTON ALL
 
   if (evento.target.id === "botonAll") {
+    urlPNG  = "url(img/vegetal.png)"
+    urlGIF = "url(img/vegetal.gif)"
+    marcadorDeSeleccionado(evento.target, urlPNG, urlGIF)
     peticionAPIAll()  
   }
 
@@ -132,6 +154,9 @@ cuerpo.addEventListener("click", (evento) => {
 
   if (evento.target.id === "botonTools") {
     //Tools:0; Learnig:1; Resources:2; Entertaiment:3
+    urlPNG  = "url(img/herramientas.png)"
+    urlGIF = "url(img/herramientas.gif)"
+    marcadorDeSeleccionado(evento.target, urlPNG, urlGIF)
     peticionAPI(0);
   }
 
@@ -139,6 +164,9 @@ cuerpo.addEventListener("click", (evento) => {
 
   if (evento.target.id === "botonLearning") {
     //Tools:0; Learnig:1; Resources:2; Entertaiment:3
+    urlPNG  = "url(img/book.png)"
+    urlGIF = "url(img/book.gif)"
+    marcadorDeSeleccionado(evento.target, urlPNG, urlGIF)
     peticionAPI(1);
   }
 
@@ -146,6 +174,9 @@ cuerpo.addEventListener("click", (evento) => {
 
   if (evento.target.id === "botonResour") {
     //Tools:0; Learnig:1; Resources:2; Entertaiment:3
+    urlPNG  = "url(img/cajas.png)"
+    urlGIF = "url(img/cajas.gif)"
+    marcadorDeSeleccionado(evento.target, urlPNG, urlGIF)
     peticionAPI(2);
   }
 
@@ -153,18 +184,21 @@ cuerpo.addEventListener("click", (evento) => {
 
   if (evento.target.id === "botonEnterta") {
     //Tools:0; Learnig:1; Resources:2; Entertaiment:3
+    urlPNG  = "url(img/tv.png)"
+    urlGIF = "url(img/tv.gif)"
+    marcadorDeSeleccionado(evento.target, urlPNG, urlGIF)
     peticionAPI(3);
   }
 
   //BOTON ADMIN
 
   if (evento.target.id === "botonAdmin") {
+    urlPNG  = "url(img/fabrica.png)"
+    urlGIF = "url(img/fabrica.gif)"
+    marcadorDeSeleccionado(evento.target, urlPNG, urlGIF)
     chrome.tabs.create({ url: "chrome://bookmarks/" });
   }
 
-  //ESTA FALLANDO AL TOCAR LE LINK PQ EL evento.target.href solo lo
-  //tiene el enlace, no la imagen ni el parrafo
-  //UNA SOLUCION SERIA AÑADIRLE EL HREF A ELLOS TAMB
 
   //Uso la api tabs para abrir el enlace en el navegador
   
@@ -179,6 +213,8 @@ cuerpo.addEventListener("click", (evento) => {
     
     chrome.tabs.create({ url: evento.target.parentNode.href });
   }
+
+  
 
   
 });

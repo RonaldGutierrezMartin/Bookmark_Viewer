@@ -141,7 +141,7 @@ a.aTarjeta:hover{
     
 }
 #botonTools:hover{
-    background-image: url(../img/herramientas-para-reparar.gif);
+    background-image: url(../img/herramientas.gif);
     filter: hue-rotate(90deg);
 }
 #botonTools{
@@ -149,7 +149,7 @@ a.aTarjeta:hover{
     filter: hue-rotate(90deg);
 }
 #botonLearning:hover{
-    background-image: url(../img/libro2.gif);
+    background-image: url(../img/book.gif);
     filter: hue-rotate(280deg);
 }
 #botonLearning{
@@ -157,7 +157,7 @@ a.aTarjeta:hover{
     filter: hue-rotate(280deg);
 }
 #botonResour:hover{
-    background-image: url(../img/paleta.gif);
+    background-image: url(../img/cajas.gif);
     filter: hue-rotate(120deg);
 }
 #botonResour{
@@ -165,7 +165,7 @@ a.aTarjeta:hover{
     filter: hue-rotate(120deg);
 }
 #botonEnterta:hover{
-    background-image: url(../img/television.gif);
+    background-image: url(../img/tv.gif);
     filter: hue-rotate(50deg);
 }
 #botonEnterta{
