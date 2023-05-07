@@ -42,17 +42,26 @@ form{
     padding: 0px 8px;
     border: 1px solid rgba(0, 0, 0, 0.5);
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
-    background-color: rgb(255, 255, 255);
+    /* background-color: rgb(255, 255, 255); */
     font-size: 15px;
     font-weight: bold;
-    
+    color: rgba(255, 255, 255,0.8);
+    background-color: rgb(51, 50, 50);
+    letter-spacing: 1px;
 }
 .inputBuscar::placeholder{
     
-    background-image: url(../img/lupa.png);
+    background-image: url(../img/lupa_blanca.png);
     background-size: 17px;
     background-repeat: no-repeat;
     
+}
+.inputBuscar:focus{
+    box-shadow: 0px 0px 10px rgba(255, 255, 255,0.5);
+    
+}
+.inputBuscar:hover{
+    box-shadow: 0px 0px 10px rgba(255, 255, 255,0.5);
 }
 header{
     margin: 0px;
@@ -66,7 +75,7 @@ nav .botones{
     flex-direction: row;
     justify-content: center;
     /* background-color: rgb(36, 36, 36); */
-    background-color: aqua;
+    
 }
 main{
     display: flex;
@@ -82,7 +91,7 @@ main{
     width: max-content;
     height: max-content;
     margin: 5px;
-    border-radius: 25px;
+    border-radius: 10px;
     text-decoration: none;
     padding: 0px,5px;
     justify-content: center;
@@ -113,15 +122,20 @@ a.aTarjeta:hover{
     
 }
 .botonesMenu{
-    width: 35px;
-    height: 35px;
-    background-size: cover;
+    width: max-content;
+    height: max-content;
+    padding: 10px;
     cursor: pointer;
     border: none;
     margin: 5px;
     border-radius: 10px;
-    background-color: rgb(36, 36, 36);
-    
+    background-color: rgb(51, 50, 50);
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+    color: white;
+
+}
+.botonesMenu:hover{
+    box-shadow: 0px 0px 10px rgba(255, 255, 255,0.5);
 }
 
 #botonFav{

@@ -1,8 +1,8 @@
 const templateBotones = document.querySelector("#templateBotones")
-const templateBotonesClon = templateBotones.cloneNode(true)
+const divBotones  =document.querySelector(".botones")
 
 const templatePlantilla = document.querySelector("#templatePlantilla");
-const templatePlantillaClon = templatePlantilla.cloneNode(true);
+
 const mainContendor = document.querySelector("main");
 const cuerpo = document.querySelector("body");
 const inputBuscar = document.querySelector(".inputBuscar")
@@ -33,6 +33,29 @@ function insertarEnExtension(arrayCarpeta) {
   mainContendor.appendChild(fragmento);
 }
 
+function insertarBotones(){
+  console.log("entro en insertar")
+  const fragmento = document.createDocumentFragment();
+  arrayCarpetas.forEach(carpeta =>{
+    console.log("carpeta")
+    console.log(carpeta)
+    for(let marcador = 0; marcador<carpeta.children.length;marcador++){
+      console.log("esto es el for")
+      if (carpeta.children[marcador].hasOwnProperty("url")){
+        
+        const templateBotonesClon = templateBotones.content.cloneNode(true)
+        templateBotonesClon.querySelector(".botonesMenu").textContent = carpeta.title
+        templateBotonesClon.querySelector(".botonesMenu").id = carpeta.title
+        fragmento.appendChild(templateBotonesClon)
+        console.log("entro en el if ")
+        break
+      }
+
+    }
+  })
+  divBotones.appendChild(fragmento)
+}
+
 function peticionAPI() {
   //Tools:0; Learnig:1; Resources:2; Entertaiment:3
 
@@ -47,8 +70,6 @@ function peticionAPI() {
 
       // const arrayCarpeta =
       //   resultado[0].children[1].children[indexCarpeta].children;
-
-      // insertarEnExtension(arrayCarpeta);
     })
     .catch((error) => {
       // Manejo de errores si la promesa es rechazada
@@ -63,11 +84,8 @@ function buscarCarpetasRaiz(resultado){
     if(nodo.hasOwnProperty("children")){
       nodo.children.forEach(carpetaRaiz =>{
         
-        
         arrayCarpetasPendiente.push(carpetaRaiz)
-        console.log("se añadio carpeta a array pendiente")
-
-
+        
       })
     }
   })
@@ -83,33 +101,19 @@ function buscarCarpetasHijas(){
       
       if(nodoHijo.hasOwnProperty("children")){
         arrayCarpetasPendiente.push(nodoHijo)
-        console.log("se añadio a PENDIENTE")
+        
       }
     })
     arrayCarpetas.push(arrayCarpetasPendiente[carpetaRaiz])
-    console.log("SE AÑADIO A CARPETAS")
+    
   }
   
-  
+  insertarBotones()
 }
-// function buscarCarpetasHijas(){
-//   console.log("buscarCarpetasHijas")
-//   arrayCarpetasPendiente.forEach(carpetaRaiz =>{
-//     carpetaRaiz.children.forEach(nodoHijo =>{
 
-      
-//       if(nodoHijo.hasOwnProperty("children")){
-//         arrayCarpetasPendiente.push(nodoHijo)
-//       }
-//     })
-//     arrayCarpetas.push(carpetaRaiz)
-//   })
-  
-// }
 console.log("array de carpetas pendientes")
 console.log(arrayCarpetasPendiente)
 console.log("array de carpetas")
-
 console.log(arrayCarpetas)
 
 
