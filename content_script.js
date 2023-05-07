@@ -64,25 +64,37 @@ function buscarCarpetasRaiz(resultado){
         console.log(carpetaRaiz)
         
         arrayCarpetasPendiente.push(carpetaRaiz)
+        console.log("se añadio carpeta a array pendiente")
 
       })
     }
   })
   buscarCarpetasHijas()
 }
+console.log("array de carpetas pendientes")
+console.log(arrayCarpetasPendiente)
 
 function buscarCarpetasHijas(){
   
   arrayCarpetasPendiente.forEach(carpetaRaiz =>{
     carpetaRaiz.children.forEach(nodoHijo =>{
+
+      console.log("carpera raiz ")
+      console.log(carpetaRaiz)
+
       if(nodoHijo.hasOwnProperty("children")){
+
+        console.log("nodoHijo ")
+        console.log(nodoHijo)
+
         arrayCarpetasPendiente.push(nodoHijo)
         arrayCarpetas.push(carpetaRaiz)
 
-      }else{
-        arrayCarpetas.push(carpetaRaiz)
+        console.log("se añadio carpeta a array pendiente y final")
+
       }
     })
+    arrayCarpetas.push(carpetaRaiz)
   })
 
 }
