@@ -10,6 +10,7 @@ const aTarjeta  =document.querySelector(".aTarjeta")
  
 let arrayCarpetas = []
 let arrayCarpetasPendiente = []
+let resultadoRequest 
 
 let BotSelecParaCambio = null
 let BGIMGBotSelParaCamb = null
@@ -58,46 +59,49 @@ function peticionAPI() {
 function buscarCarpetasRaiz(resultado){
   
   resultado.forEach(nodo =>{
-    console.log(nodo)
+    
     if(nodo.hasOwnProperty("children")){
       nodo.children.forEach(carpetaRaiz =>{
-        console.log(carpetaRaiz)
+        
         
         arrayCarpetasPendiente.push(carpetaRaiz)
         console.log("se añadio carpeta a array pendiente")
 
+
       })
     }
   })
+  console.log("array de carpetas pendientes")
+  console.log(arrayCarpetasPendiente)
   buscarCarpetasHijas()
 }
-console.log("array de carpetas pendientes")
-console.log(arrayCarpetasPendiente)
+
 
 function buscarCarpetasHijas(){
   
   arrayCarpetasPendiente.forEach(carpetaRaiz =>{
     carpetaRaiz.children.forEach(nodoHijo =>{
 
-      console.log("carpera raiz ")
-      console.log(carpetaRaiz)
-
+      
       if(nodoHijo.hasOwnProperty("children")){
 
-        console.log("nodoHijo ")
-        console.log(nodoHijo)
+        
 
         arrayCarpetasPendiente.push(nodoHijo)
-        arrayCarpetas.push(carpetaRaiz)
+        
 
-        console.log("se añadio carpeta a array pendiente y final")
+        
 
       }
     })
     arrayCarpetas.push(carpetaRaiz)
   })
-
+  
 }
+console.log("array de carpetas pendientes")
+console.log(arrayCarpetasPendiente)
+console.log("array de carpetas")
+
 console.log(arrayCarpetas)
 
 
@@ -290,3 +294,4 @@ window.addEventListener("load", ()=>{
 peticionAPI()
   
 
+console.log("final")
