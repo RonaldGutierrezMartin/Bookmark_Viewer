@@ -1,10 +1,16 @@
-const botonTools = document.querySelector("#botonFav");
+const templateBotones = document.querySelector("#templateBotones")
+const templateBotonesClon = templateBotones.cloneNode(true)
+
 const templatePlantilla = document.querySelector("#templatePlantilla");
 const templatePlantillaClon = templatePlantilla.cloneNode(true);
 const mainContendor = document.querySelector("main");
 const cuerpo = document.querySelector("body");
 const inputBuscar = document.querySelector(".inputBuscar")
 const aTarjeta  =document.querySelector(".aTarjeta")
+ 
+let arrayCarpetas = []
+let arrayCarpetasPendiente = []
+
 let BotSelecParaCambio = null
 let BGIMGBotSelParaCamb = null
 let urlGIF
@@ -26,7 +32,7 @@ function insertarEnExtension(arrayCarpeta) {
   mainContendor.appendChild(fragmento);
 }
 
-function peticionAPI(indexCarpeta) {
+function peticionAPI() {
   //Tools:0; Learnig:1; Resources:2; Entertaiment:3
 
   //El metodo getTree me devuelve una promesa por lo que la almaceno en una variable y la analizo
@@ -35,16 +41,54 @@ function peticionAPI(indexCarpeta) {
   miPromesa
     .then((resultado) => {
       //CarpetasPadres.OtrosMarcadores.Tools.ArrayConMarcadoresDeTools
-      const arrayCarpeta =
-        resultado[0].children[1].children[indexCarpeta].children;
+      
+      buscarCarpetasRaiz(resultado)
 
-      insertarEnExtension(arrayCarpeta);
+      // const arrayCarpeta =
+      //   resultado[0].children[1].children[indexCarpeta].children;
+
+      // insertarEnExtension(arrayCarpeta);
     })
     .catch((error) => {
       // Manejo de errores si la promesa es rechazada
       console.error(error);
     });
 }
+
+function buscarCarpetasRaiz(resultado){
+  
+  resultado.forEach(nodo =>{
+    console.log(nodo)
+    if(nodo.hasOwnProperty("children")){
+      nodo.children.forEach(carpetaRaiz =>{
+        console.log(carpetaRaiz)
+        
+        arrayCarpetasPendiente.push(carpetaRaiz)
+
+      })
+    }
+  })
+  buscarCarpetasHijas()
+}
+
+function buscarCarpetasHijas(){
+  
+  arrayCarpetasPendiente.forEach(carpetaRaiz =>{
+    carpetaRaiz.children.forEach(nodoHijo =>{
+      if(nodoHijo.hasOwnProperty("children")){
+        arrayCarpetasPendiente.push(nodoHijo)
+        arrayCarpetas.push(carpetaRaiz)
+
+      }else{
+        arrayCarpetas.push(carpetaRaiz)
+      }
+    })
+  })
+
+}
+console.log(arrayCarpetas)
+
+
 
 function peticionAPIAll() {
   //Tools:0; Learnig:1; Resources:2; Entertaiment:3
@@ -125,20 +169,21 @@ function marcadorDeSeleccionado(botonSelecionado,urlGIF){
   
   botonSelecionado.style.backgroundImage = urlGIF
   
+
 }
 
 
 //Implemeto la delegacion de eventos
 cuerpo.addEventListener("click", (evento) => {
 
-  //BOTON FAVORITOS
+  // //BOTON FAVORITOS
 
-  if (evento.target.id === "botonFav") {
+  // if (evento.target.id === "botonFav") {
     
-    urlGIF = "url(img/latido-del-corazon.gif)"
-    marcadorDeSeleccionado(evento.target, urlGIF)
-    peticionAPISoloFav()  
-  }
+  //   urlGIF = "url(img/latido-del-corazon.gif)"
+  //   marcadorDeSeleccionado(evento.target, urlGIF)
+  //   peticionAPISoloFav()  
+  // }
 
   //BOTON ALL
 
@@ -149,45 +194,45 @@ cuerpo.addEventListener("click", (evento) => {
     peticionAPIAll()  
   }
 
-  //BOTON TOOLS
+  // //BOTON TOOLS
 
-  if (evento.target.id === "botonTools") {
-    //Tools:0; Learnig:1; Resources:2; Entertaiment:3
+  // if (evento.target.id === "botonTools") {
+  //   //Tools:0; Learnig:1; Resources:2; Entertaiment:3
     
-    urlGIF = "url(img/herramientas.gif)"
-    marcadorDeSeleccionado(evento.target, urlGIF)
-    peticionAPI(0);
-  }
+  //   urlGIF = "url(img/herramientas.gif)"
+  //   marcadorDeSeleccionado(evento.target, urlGIF)
+  //   peticionAPI(0);
+  // }
 
-  //BOTON LEARNING
+  // //BOTON LEARNING
 
-  if (evento.target.id === "botonLearning") {
-    //Tools:0; Learnig:1; Resources:2; Entertaiment:3
+  // if (evento.target.id === "botonLearning") {
+  //   //Tools:0; Learnig:1; Resources:2; Entertaiment:3
     
-    urlGIF = "url(img/book.gif)"
-    marcadorDeSeleccionado(evento.target, urlGIF)
-    peticionAPI(1);
-  }
+  //   urlGIF = "url(img/book.gif)"
+  //   marcadorDeSeleccionado(evento.target, urlGIF)
+  //   peticionAPI(1);
+  // }
 
-  //BOTON RESOURCES
+  // //BOTON RESOURCES
 
-  if (evento.target.id === "botonResour") {
-    //Tools:0; Learnig:1; Resources:2; Entertaiment:3
+  // if (evento.target.id === "botonResour") {
+  //   //Tools:0; Learnig:1; Resources:2; Entertaiment:3
     
-    urlGIF = "url(img/cajas.gif)"
-    marcadorDeSeleccionado(evento.target, urlGIF)
-    peticionAPI(2);
-  }
+  //   urlGIF = "url(img/cajas.gif)"
+  //   marcadorDeSeleccionado(evento.target, urlGIF)
+  //   peticionAPI(2);
+  // }
 
-  //BOTON ENTRETENIMIENTO
+  // //BOTON ENTRETENIMIENTO
 
-  if (evento.target.id === "botonEnterta") {
-    //Tools:0; Learnig:1; Resources:2; Entertaiment:3
+  // if (evento.target.id === "botonEnterta") {
+  //   //Tools:0; Learnig:1; Resources:2; Entertaiment:3
     
-    urlGIF = "url(img/tv.gif)"
-    marcadorDeSeleccionado(evento.target, urlGIF)
-    peticionAPI(3);
-  }
+  //   urlGIF = "url(img/tv.gif)"
+  //   marcadorDeSeleccionado(evento.target, urlGIF)
+  //   peticionAPI(3);
+  // }
 
   //BOTON ADMIN
 
@@ -229,5 +274,7 @@ inputBuscar.addEventListener("input", ()=>{
 window.addEventListener("load", ()=>{
   document.querySelector(".inputBuscar").focus()
 });
+
+peticionAPI()
   
 

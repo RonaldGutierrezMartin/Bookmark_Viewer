@@ -58,11 +58,15 @@ header{
     margin: 0px;
 }
 nav .botones{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
     padding-top: 5px;
     display: flex;
     flex-direction: row;
     justify-content: center;
-    background-color: rgb(36, 36, 36);
+    /* background-color: rgb(36, 36, 36); */
+    background-color: aqua;
 }
 main{
     display: flex;
