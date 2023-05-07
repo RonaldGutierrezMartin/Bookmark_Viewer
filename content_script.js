@@ -225,5 +225,9 @@ inputBuscar.addEventListener("input", ()=>{
 
   buscar(inputBuscar.value)
 })
+
+window.addEventListener("load", ()=>{
+  document.querySelector(".inputBuscar").focus()
+});
   
 
