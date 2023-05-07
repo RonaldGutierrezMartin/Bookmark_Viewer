@@ -1,7 +1,7 @@
 {
-    "name": "Bookmark View",
+    "name": "Bookmark Viewer",
     "description": "Quick view of google chrome bookmarks ",
-    "version": "1.0",
+    "version": "1.0.0",
     "manifest_version":3,
     "action":{
         "default_popup":"popup.html"
