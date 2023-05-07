@@ -57,7 +57,7 @@ function peticionAPI() {
 }
 
 function buscarCarpetasRaiz(resultado){
-  
+  console.log("buscaCarpetaRaiz")
   resultado.forEach(nodo =>{
     
     if(nodo.hasOwnProperty("children")){
@@ -71,33 +71,41 @@ function buscarCarpetasRaiz(resultado){
       })
     }
   })
-  console.log("array de carpetas pendientes")
-  console.log(arrayCarpetasPendiente)
   buscarCarpetasHijas()
 }
 
-
 function buscarCarpetasHijas(){
+  console.log("buscarCarpetasHijas")
   
-  arrayCarpetasPendiente.forEach(carpetaRaiz =>{
-    carpetaRaiz.children.forEach(nodoHijo =>{
+  for (let carpetaRaiz = 0; carpetaRaiz<arrayCarpetasPendiente.length; carpetaRaiz++){
+    arrayCarpetasPendiente[carpetaRaiz].children.forEach(nodoHijo =>{
 
       
       if(nodoHijo.hasOwnProperty("children")){
-
-        
-
         arrayCarpetasPendiente.push(nodoHijo)
-        
-
-        
-
+        console.log("se añadio a PENDIENTE")
       }
     })
-    arrayCarpetas.push(carpetaRaiz)
-  })
+    arrayCarpetas.push(arrayCarpetasPendiente[carpetaRaiz])
+    console.log("SE AÑADIO A CARPETAS")
+  }
+  
   
 }
+// function buscarCarpetasHijas(){
+//   console.log("buscarCarpetasHijas")
+//   arrayCarpetasPendiente.forEach(carpetaRaiz =>{
+//     carpetaRaiz.children.forEach(nodoHijo =>{
+
+      
+//       if(nodoHijo.hasOwnProperty("children")){
+//         arrayCarpetasPendiente.push(nodoHijo)
+//       }
+//     })
+//     arrayCarpetas.push(carpetaRaiz)
+//   })
+  
+// }
 console.log("array de carpetas pendientes")
 console.log(arrayCarpetasPendiente)
 console.log("array de carpetas")
