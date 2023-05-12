@@ -1,8 +1,6 @@
 const templateBotones = document.querySelector("#templateBotones")
 const divBotones  =document.querySelector(".botones")
-
 const templatePlantilla = document.querySelector("#templatePlantilla");
-
 const mainContendor = document.querySelector("main");
 const cuerpo = document.querySelector("body");
 const inputBuscar = document.querySelector(".inputBuscar")
@@ -52,26 +50,27 @@ function incertarMarcadores(carpeta){
   const fragmento = document.createDocumentFragment();
 
   carpeta.children.forEach(marcador =>{
-    console.log(marcador)
-    const templatePlantillaClon = templatePlantilla.content.cloneNode(true)
-    console.log(templatePlantillaClon)
-    templatePlantillaClon.querySelector(".tituloTarjeta").textContent = marcador.title
-    templatePlantillaClon.querySelector(".aTarjeta").href = marcador.url;
 
-    //Accedo al favicon de cualquier web
-    templatePlantillaClon.querySelector(".imagen").src =
-      "https://s2.googleusercontent.com/s2/favicons?domain=" + marcador.url + "&sz=32";
+    if(marcador.hasOwnProperty("url")){
 
-    fragmento.appendChild(templatePlantillaClon);
+      console.log(marcador)
+      const templatePlantillaClon = templatePlantilla.content.cloneNode(true)
+      console.log(templatePlantillaClon)
+      templatePlantillaClon.querySelector(".tituloTarjeta").textContent = marcador.title
+      templatePlantillaClon.querySelector(".aTarjeta").href = marcador.url;
 
+      //Accedo al favicon de cualquier web
+      templatePlantillaClon.querySelector(".imagen").src =
+        "https://s2.googleusercontent.com/s2/favicons?domain=" + marcador.url + "&sz=32";
+
+      fragmento.appendChild(templatePlantillaClon);
+    }
   })
-
   mainContendor.innerHTML = "";
   mainContendor.appendChild(fragmento);
 }
 
 function peticionAPI() {
-  //Tools:0; Learnig:1; Resources:2; Entertaiment:3
 
   //El metodo getTree me devuelve una promesa por lo que la almaceno en una variable y la analizo
   miPromesa = chrome.bookmarks.getTree();
@@ -125,14 +124,7 @@ function buscarCarpetasHijas(){
   insertarBotones()
 }
 
-console.log("array de carpetas pendientes")
-console.log(arrayCarpetasPendiente)
-console.log("array de carpetas")
-console.log(arrayCarpetas)
-
-
-
-function insertarTodosBotones() {
+function insertarTodosMarcadores() {
   const fragmento = document.createDocumentFragment();
 
   arrayCarpetas.forEach(carpeta =>{
@@ -151,35 +143,24 @@ function insertarTodosBotones() {
   
     })
   })
-
-  
-
   mainContendor.innerHTML = "";
   mainContendor.appendChild(fragmento);
 }
 
-
-
-function peticionAPISoloFav(){
-  //El metodo getTree me devuelve una promesa por lo que la almaceno en una variable y la analizo
-  miPromesa = chrome.bookmarks.getTree();
-  // Ejecutamos la promesa y accedemos al resultado del array
-  miPromesa
-    .then((resultado) => {
-      //CarpetasPadres.OtrosMarcadores.Tools.ArrayConMarcadoresDeTools
-      const arrayCarpeta = resultado[0].children[0].children;
-      console.log(arrayCarpeta)
-      insertarEnExtension(arrayCarpeta);
-    })
-    .catch((error) => {
-      // Manejo de errores si la promesa es rechazada
-      console.error(error);
-    });
-}
-
-
-
 function buscar(titulo){
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   //Tools:0; Learnig:1; Resources:2; Entertaiment:3
   miPromesa = chrome.bookmarks.getTree();
@@ -205,33 +186,17 @@ function buscar(titulo){
       // Manejo de errores si la promesa es rechazada
       console.error(error);
     });
-
 }
-
-function marcadorDeSeleccionado(botonSelecionado,urlGIF){
-  
-  if(BotSelecParaCambio!==null){
-    
-    BotSelecParaCambio.style.backgroundImage = BGIMGBotSelParaCamb
-  }
-  BotSelecParaCambio = botonSelecionado
-  
-  botonSelecionado.style.backgroundImage = urlGIF
-  
-
-}
-
 
 //Implemeto la delegacion de eventos
 cuerpo.addEventListener("click", (evento) => {
 
   //BOTONES
-
   if(evento.target.matches(".botonesMenu")){
     console.log("Entre en el evento")
 
     if(evento.target.id === "mostrarTodos"){
-      insertarTodosBotones() 
+      insertarTodosMarcadores() 
 
     }else if(evento.target.id === "admin"){
       chrome.tabs.create({ url: "chrome://bookmarks/" });
@@ -246,6 +211,8 @@ cuerpo.addEventListener("click", (evento) => {
     }
     
   }
+
+  //ABRIR MARCADOR
   
   if (evento.target.matches(".aTarjeta")) {
     
@@ -258,14 +225,10 @@ cuerpo.addEventListener("click", (evento) => {
     chrome.tabs.create({ url: evento.target.parentNode.href });
   }
 
-  
-
-  
 });
 
 
 //BOTON BUSCAR
-
 inputBuscar.addEventListener("input", ()=>{
 
   buscar(inputBuscar.value)
@@ -275,7 +238,7 @@ window.addEventListener("load", ()=>{
   document.querySelector(".inputBuscar").focus()
 });
 
+
 peticionAPI()
   
 
-console.log("final")
