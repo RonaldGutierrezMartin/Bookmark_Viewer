@@ -85,7 +85,7 @@ function peticionAPI() {
 }
 
 function buscarCarpetasRaiz(resultado){
-  console.log("buscaCarpetaRaiz")
+  
   resultado.forEach(nodo =>{
     
     if(nodo.hasOwnProperty("children")){
@@ -100,11 +100,9 @@ function buscarCarpetasRaiz(resultado){
 }
 
 function buscarCarpetasHijas(){
-  console.log("buscarCarpetasHijas")
   
   for (let carpetaRaiz = 0; carpetaRaiz<arrayCarpetasPendiente.length; carpetaRaiz++){
     arrayCarpetasPendiente[carpetaRaiz].children.forEach(nodoHijo =>{
-
       
       if(nodoHijo.hasOwnProperty("children")){
         arrayCarpetasPendiente.push(nodoHijo)
@@ -112,7 +110,6 @@ function buscarCarpetasHijas(){
       }
     })
     arrayCarpetas.push(arrayCarpetasPendiente[carpetaRaiz])
-    
   }
   
   insertarBotones()

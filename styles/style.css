@@ -3,7 +3,7 @@ body{
     
     
     width: 450px;
-    height: 500px;
+    height: 600px;
     padding: 0px;
     margin: 0px;
     background-color: rgb(36, 36, 36);
@@ -107,7 +107,7 @@ a.aTarjeta:hover{
     
     width: 20px;
     height: 20px;
-    border-radius: 50px;
+    border-radius: 5px; 
     
     margin-left: 5px;
     margin-right: 2.5px;
@@ -138,65 +138,7 @@ a.aTarjeta:hover{
     box-shadow: 0px 0px 10px rgba(255, 255, 255,0.5);
 }
 
-#botonFav{
-    background-image: url(../img/latido-del-corazon.png);
-    filter: hue-rotate(180deg);
-    
-}
-#botonFav:hover{
-    background-image: url(../img/latido-del-corazon.gif);
-    filter: hue-rotate(180deg);
-    
-}
 
-#botonAll:hover{
-    background-image: url(../img/vegetal.gif);
-    
-}
-#botonAll{
-    background-image: url(../img/vegetal.png);
-    
-}
-#botonTools:hover{
-    background-image: url(../img/herramientas.gif);
-    filter: hue-rotate(90deg);
-}
-#botonTools{
-    background-image: url(../img/herramientas.png);
-    filter: hue-rotate(90deg);
-}
-#botonLearning:hover{
-    background-image: url(../img/book.gif);
-    filter: hue-rotate(280deg);
-}
-#botonLearning{
-    background-image: url(../img/book.png);
-    filter: hue-rotate(280deg);
-}
-#botonResour:hover{
-    background-image: url(../img/cajas.gif);
-    filter: hue-rotate(120deg);
-}
-#botonResour{
-    background-image: url(../img/cajas.png);
-    filter: hue-rotate(120deg);
-}
-#botonEnterta:hover{
-    background-image: url(../img/tv.gif);
-    filter: hue-rotate(50deg);
-}
-#botonEnterta{
-    background-image: url(../img/tv.png);
-    filter: hue-rotate(50deg);
-}
-#botonAdmin:hover{
-    background-image: url(../img/fabrica.gif);
-    filter: hue-rotate(220deg);
-}
-#botonAdmin{
-    background-image: url(../img/fabrica.png);
-    filter: hue-rotate(220deg);
-}
 ::-webkit-scrollbar{
     width: 10px;
 } 
