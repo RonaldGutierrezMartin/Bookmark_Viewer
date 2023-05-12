@@ -45,15 +45,36 @@ function insertarBotones(){
         
         const templateBotonesClon = templateBotones.content.cloneNode(true)
         templateBotonesClon.querySelector(".botonesMenu").textContent = carpeta.title
-        templateBotonesClon.querySelector(".botonesMenu").id = carpeta.title
+        templateBotonesClon.querySelector(".botonesMenu").id = carpeta.id
         fragmento.appendChild(templateBotonesClon)
-        console.log("entro en el if ")
         break
       }
 
     }
   })
   divBotones.appendChild(fragmento)
+}
+
+function incertarMarcadores(carpeta){
+  const fragmento = document.createDocumentFragment();
+
+  carpeta.children.forEach(marcador =>{
+    console.log(marcador)
+    const templatePlantillaClon = templatePlantilla.content.cloneNode(true)
+    console.log(templatePlantillaClon)
+    templatePlantillaClon.querySelector(".tituloTarjeta").textContent = marcador.title
+    templatePlantillaClon.querySelector(".aTarjeta").href = marcador.url;
+
+    //Accedo al favicon de cualquier web
+    templatePlantillaClon.querySelector(".imagen").src =
+      "https://s2.googleusercontent.com/s2/favicons?domain=" + marcador.url + "&sz=32";
+
+    fragmento.appendChild(templatePlantillaClon);
+
+  })
+
+  mainContendor.innerHTML = "";
+  mainContendor.appendChild(fragmento);
 }
 
 function peticionAPI() {
@@ -141,6 +162,8 @@ function peticionAPIAll() {
     });
 }
 
+
+
 function peticionAPISoloFav(){
   //El metodo getTree me devuelve una promesa por lo que la almaceno en una variable y la analizo
   miPromesa = chrome.bookmarks.getTree();
@@ -157,6 +180,8 @@ function peticionAPISoloFav(){
       console.error(error);
     });
 }
+
+
 
 function buscar(titulo){
 
@@ -213,6 +238,19 @@ cuerpo.addEventListener("click", (evento) => {
   //   peticionAPISoloFav()  
   // }
 
+  //BOTONES
+
+  if(evento.target.matches(".botonesMenu")){
+    console.log("Entre en el evento")
+    arrayCarpetas.forEach(carpeta =>{
+      if(carpeta.id === evento.target.id){
+        console.log("Lame a la funcion")
+        incertarMarcadores(carpeta)
+      }
+    })
+  }
+
+
   //BOTON ALL
 
   if (evento.target.id === "botonAll") {
@@ -222,45 +260,6 @@ cuerpo.addEventListener("click", (evento) => {
     peticionAPIAll()  
   }
 
-  // //BOTON TOOLS
-
-  // if (evento.target.id === "botonTools") {
-  //   //Tools:0; Learnig:1; Resources:2; Entertaiment:3
-    
-  //   urlGIF = "url(img/herramientas.gif)"
-  //   marcadorDeSeleccionado(evento.target, urlGIF)
-  //   peticionAPI(0);
-  // }
-
-  // //BOTON LEARNING
-
-  // if (evento.target.id === "botonLearning") {
-  //   //Tools:0; Learnig:1; Resources:2; Entertaiment:3
-    
-  //   urlGIF = "url(img/book.gif)"
-  //   marcadorDeSeleccionado(evento.target, urlGIF)
-  //   peticionAPI(1);
-  // }
-
-  // //BOTON RESOURCES
-
-  // if (evento.target.id === "botonResour") {
-  //   //Tools:0; Learnig:1; Resources:2; Entertaiment:3
-    
-  //   urlGIF = "url(img/cajas.gif)"
-  //   marcadorDeSeleccionado(evento.target, urlGIF)
-  //   peticionAPI(2);
-  // }
-
-  // //BOTON ENTRETENIMIENTO
-
-  // if (evento.target.id === "botonEnterta") {
-  //   //Tools:0; Learnig:1; Resources:2; Entertaiment:3
-    
-  //   urlGIF = "url(img/tv.gif)"
-  //   marcadorDeSeleccionado(evento.target, urlGIF)
-  //   peticionAPI(3);
-  // }
 
   //BOTON ADMIN
 

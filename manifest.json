@@ -10,9 +10,6 @@
         "bookmarks",
         "tabs"
     ],
-    "background.service_worker":{
-        "scripts":["background.js"]
-    },
     "icons": {
         "128": "img/marca-de-libro.png"
     }
