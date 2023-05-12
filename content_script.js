@@ -8,35 +8,42 @@ const aTarjeta  =document.querySelector(".aTarjeta")
  
 let arrayCarpetas = []
 let arrayCarpetasPendiente = []
+let arrayMarcadores = []
 let resultadoRequest 
 
 let BotSelecParaCambio = null
 let BGIMGBotSelParaCamb = null
 let urlGIF
-function insertarEnExtension(arrayCarpeta) {
-  const fragmento = document.createDocumentFragment();
-  arrayCarpeta.forEach((i) => {
-    console.log(i);
-    const templatePlantillaClon = templatePlantilla.content.cloneNode(true);
-    templatePlantillaClon.querySelector(".tituloTarjeta").textContent = i.title;
-    templatePlantillaClon.querySelector(".aTarjeta").href = i.url;
 
-    //Accedo al favicon de cualquier web
-    templatePlantillaClon.querySelector(".imagen").src =
+function insertarMarcadores() {
+  const fragmento = document.createDocumentFragment();
+  arrayMarcadores.forEach((i) => {
+    
+    if(i.hasOwnProperty("url")){
+
+      const templatePlantillaClon = templatePlantilla.content.cloneNode(true);
+      templatePlantillaClon.querySelector(".tituloTarjeta").textContent = i.title;
+      templatePlantillaClon.querySelector(".aTarjeta").href = i.url;
+
+      //Accedo al favicon de cualquier web
+      templatePlantillaClon.querySelector(".imagen").src =
       "https://s2.googleusercontent.com/s2/favicons?domain=" + i.url + "&sz=32";
 
-    fragmento.appendChild(templatePlantillaClon);
+      fragmento.appendChild(templatePlantillaClon);
+    }
+
+    
   });
+  arrayMarcadores = []
   mainContendor.innerHTML = "";
   mainContendor.appendChild(fragmento);
 }
 
 function insertarBotones(){
-  console.log("entro en insertar")
+  
   const fragmento = document.createDocumentFragment();
   arrayCarpetas.forEach(carpeta =>{
-    console.log("carpeta")
-    console.log(carpeta)
+    
     const templateBotonesClon = templateBotones.content.cloneNode(true)
     templateBotonesClon.querySelector(".botonesMenu").textContent = carpeta.title
     templateBotonesClon.querySelector(".botonesMenu").id = carpeta.id
@@ -46,28 +53,15 @@ function insertarBotones(){
   divBotones.appendChild(fragmento)
 }
 
-function incertarMarcadores(carpeta){
-  const fragmento = document.createDocumentFragment();
+function incertarMarcadoresDeCarpeta(carpeta){
 
   carpeta.children.forEach(marcador =>{
 
-    if(marcador.hasOwnProperty("url")){
-
-      console.log(marcador)
-      const templatePlantillaClon = templatePlantilla.content.cloneNode(true)
-      console.log(templatePlantillaClon)
-      templatePlantillaClon.querySelector(".tituloTarjeta").textContent = marcador.title
-      templatePlantillaClon.querySelector(".aTarjeta").href = marcador.url;
-
-      //Accedo al favicon de cualquier web
-      templatePlantillaClon.querySelector(".imagen").src =
-        "https://s2.googleusercontent.com/s2/favicons?domain=" + marcador.url + "&sz=32";
-
-      fragmento.appendChild(templatePlantillaClon);
-    }
+    arrayMarcadores.push(marcador)
+    
   })
-  mainContendor.innerHTML = "";
-  mainContendor.appendChild(fragmento);
+
+  insertarMarcadores(arrayMarcadores)
 }
 
 function peticionAPI() {
@@ -124,68 +118,38 @@ function buscarCarpetasHijas(){
   insertarBotones()
 }
 
+
 function insertarTodosMarcadores() {
   const fragmento = document.createDocumentFragment();
 
   arrayCarpetas.forEach(carpeta =>{
     carpeta.children.forEach(marcador =>{
-      console.log(marcador)
-      const templatePlantillaClon = templatePlantilla.content.cloneNode(true)
-      console.log(templatePlantillaClon)
-      templatePlantillaClon.querySelector(".tituloTarjeta").textContent = marcador.title
-      templatePlantillaClon.querySelector(".aTarjeta").href = marcador.url;
-  
-      //Accedo al favicon de cualquier web
-      templatePlantillaClon.querySelector(".imagen").src =
-        "https://s2.googleusercontent.com/s2/favicons?domain=" + marcador.url + "&sz=32";
-  
-      fragmento.appendChild(templatePlantillaClon);
-  
+      
+      arrayMarcadores.push(marcador)
     })
   })
-  mainContendor.innerHTML = "";
-  mainContendor.appendChild(fragmento);
+
+  insertarMarcadores()
+  
 }
 
 function buscar(titulo){
 
+  arrayCarpetas.forEach(carpeta =>{
+    carpeta.children.forEach(marcador =>{
+      
+      if(marcador.hasOwnProperty("url")){
 
-
-
-
-
-
-
-
-
-
-
-
-
-  //Tools:0; Learnig:1; Resources:2; Entertaiment:3
-  miPromesa = chrome.bookmarks.getTree();
-  // Ejecutamos la promesa y accedemos al resultado del array
-  miPromesa
-    .then((resultado) => {
-      //CarpetasPadres.OtrosMarcadores.Tools.ArrayConMarcadoresDeTools
-      let arrayCarpeta = []
-      for(i=0;i<=3;i++){
-        
-        arrayCarpeta = arrayCarpeta.concat(resultado[0].children[1].children[i].children)
-      }
-      let elementosEncontrados =[]
-      arrayCarpeta.forEach(i =>{
-        if (i.title.toLowerCase().includes(titulo.toLowerCase())){
-          elementosEncontrados.push(i)
+        if (marcador.title.toLowerCase().includes(titulo.toLowerCase())||marcador.url.toLowerCase().includes(titulo.toLowerCase())){
+          arrayMarcadores.push(marcador)
         }
-      })
+      }
 
-      insertarEnExtension(elementosEncontrados);
+      
     })
-    .catch((error) => {
-      // Manejo de errores si la promesa es rechazada
-      console.error(error);
-    });
+  })
+  
+  insertarMarcadores()
 }
 
 //Implemeto la delegacion de eventos
@@ -193,7 +157,7 @@ cuerpo.addEventListener("click", (evento) => {
 
   //BOTONES
   if(evento.target.matches(".botonesMenu")){
-    console.log("Entre en el evento")
+    
 
     if(evento.target.id === "mostrarTodos"){
       insertarTodosMarcadores() 
@@ -204,8 +168,8 @@ cuerpo.addEventListener("click", (evento) => {
     }else{
       arrayCarpetas.forEach(carpeta =>{
         if(carpeta.id === evento.target.id){
-          console.log("Lame a la funcion")
-          incertarMarcadores(carpeta)
+          
+          incertarMarcadoresDeCarpeta(carpeta)
         }
       })
     }
