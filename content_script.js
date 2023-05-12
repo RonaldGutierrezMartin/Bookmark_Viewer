@@ -39,18 +39,11 @@ function insertarBotones(){
   arrayCarpetas.forEach(carpeta =>{
     console.log("carpeta")
     console.log(carpeta)
-    for(let marcador = 0; marcador<carpeta.children.length;marcador++){
-      console.log("esto es el for")
-      if (carpeta.children[marcador].hasOwnProperty("url")){
-        
-        const templateBotonesClon = templateBotones.content.cloneNode(true)
-        templateBotonesClon.querySelector(".botonesMenu").textContent = carpeta.title
-        templateBotonesClon.querySelector(".botonesMenu").id = carpeta.id
-        fragmento.appendChild(templateBotonesClon)
-        break
-      }
+    const templateBotonesClon = templateBotones.content.cloneNode(true)
+    templateBotonesClon.querySelector(".botonesMenu").textContent = carpeta.title
+    templateBotonesClon.querySelector(".botonesMenu").id = carpeta.id
+    fragmento.appendChild(templateBotonesClon)
 
-    }
   })
   divBotones.appendChild(fragmento)
 }
@@ -139,27 +132,30 @@ console.log(arrayCarpetas)
 
 
 
-function peticionAPIAll() {
-  //Tools:0; Learnig:1; Resources:2; Entertaiment:3
+function insertarTodosBotones() {
+  const fragmento = document.createDocumentFragment();
 
-  //El metodo getTree me devuelve una promesa por lo que la almaceno en una variable y la analizo
-  miPromesa = chrome.bookmarks.getTree();
-  // Ejecutamos la promesa y accedemos al resultado del array
-  miPromesa
-    .then((resultado) => {
-      //CarpetasPadres.OtrosMarcadores.Tools.ArrayConMarcadoresDeTools
-      let arrayCarpeta = []
-      for(i=0;i<=3;i++){
-        
-        arrayCarpeta = arrayCarpeta.concat(resultado[0].children[1].children[i].children)
-      }
-      
-      insertarEnExtension(arrayCarpeta);
+  arrayCarpetas.forEach(carpeta =>{
+    carpeta.children.forEach(marcador =>{
+      console.log(marcador)
+      const templatePlantillaClon = templatePlantilla.content.cloneNode(true)
+      console.log(templatePlantillaClon)
+      templatePlantillaClon.querySelector(".tituloTarjeta").textContent = marcador.title
+      templatePlantillaClon.querySelector(".aTarjeta").href = marcador.url;
+  
+      //Accedo al favicon de cualquier web
+      templatePlantillaClon.querySelector(".imagen").src =
+        "https://s2.googleusercontent.com/s2/favicons?domain=" + marcador.url + "&sz=32";
+  
+      fragmento.appendChild(templatePlantillaClon);
+  
     })
-    .catch((error) => {
-      // Manejo de errores si la promesa es rechazada
-      console.error(error);
-    });
+  })
+
+  
+
+  mainContendor.innerHTML = "";
+  mainContendor.appendChild(fragmento);
 }
 
 
@@ -229,50 +225,27 @@ function marcadorDeSeleccionado(botonSelecionado,urlGIF){
 //Implemeto la delegacion de eventos
 cuerpo.addEventListener("click", (evento) => {
 
-  // //BOTON FAVORITOS
-
-  // if (evento.target.id === "botonFav") {
-    
-  //   urlGIF = "url(img/latido-del-corazon.gif)"
-  //   marcadorDeSeleccionado(evento.target, urlGIF)
-  //   peticionAPISoloFav()  
-  // }
-
   //BOTONES
 
   if(evento.target.matches(".botonesMenu")){
     console.log("Entre en el evento")
-    arrayCarpetas.forEach(carpeta =>{
-      if(carpeta.id === evento.target.id){
-        console.log("Lame a la funcion")
-        incertarMarcadores(carpeta)
-      }
-    })
-  }
 
+    if(evento.target.id === "mostrarTodos"){
+      insertarTodosBotones() 
 
-  //BOTON ALL
+    }else if(evento.target.id === "admin"){
+      chrome.tabs.create({ url: "chrome://bookmarks/" });
 
-  if (evento.target.id === "botonAll") {
+    }else{
+      arrayCarpetas.forEach(carpeta =>{
+        if(carpeta.id === evento.target.id){
+          console.log("Lame a la funcion")
+          incertarMarcadores(carpeta)
+        }
+      })
+    }
     
-    urlGIF = "url(img/vegetal.gif)"
-    marcadorDeSeleccionado(evento.target, urlGIF)
-    peticionAPIAll()  
   }
-
-
-  //BOTON ADMIN
-
-  if (evento.target.id === "botonAdmin") {
-    
-    urlGIF = "url(img/fabrica.gif)"
-    marcadorDeSeleccionado(evento.target, urlGIF)
-    chrome.tabs.create({ url: "chrome://bookmarks/" });
-  }
-
-
-  //Uso la api tabs para abrir el enlace en el navegador
-  
   
   if (evento.target.matches(".aTarjeta")) {
     
