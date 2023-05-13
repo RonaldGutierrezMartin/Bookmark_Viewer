@@ -1,79 +1,80 @@
-const templateBotones = document.querySelector("#templateBotones")
-const divBotones  =document.querySelector(".botones")
+const templateBotones = document.querySelector("#templateBotones");
+const divBotones = document.querySelector(".botones");
 const templatePlantilla = document.querySelector("#templatePlantilla");
 const mainContendor = document.querySelector("main");
 const cuerpo = document.querySelector("body");
-const inputBuscar = document.querySelector(".inputBuscar")
-const aTarjeta  =document.querySelector(".aTarjeta")
- 
-let arrayCarpetas = []
-let arrayCarpetasPendiente = []
-let arrayMarcadores = []
-let resultadoRequest 
+const inputBuscar = document.querySelector(".inputBuscar");
+const aTarjeta = document.querySelector(".aTarjeta");
 
-let BotSelecParaCambio = null
-let BGIMGBotSelParaCamb = null
-let urlGIF
+const botonAbajoArriba = document.querySelector("#bajarSubir");
+
+let arrayCarpetas = [];
+let arrayCarpetasPendiente = [];
+let arrayMarcadores = [];
+let abajoArriba = "#arriba";
+
+let BotSelecParaCambio = null;
 
 function insertarMarcadores() {
   const fragmento = document.createDocumentFragment();
   arrayMarcadores.forEach((i) => {
-    
-    if(i.hasOwnProperty("url")){
-
+    if (i.hasOwnProperty("url")) {
+      
       const templatePlantillaClon = templatePlantilla.content.cloneNode(true);
+      
       templatePlantillaClon.querySelector(".tituloTarjeta").textContent = i.title;
+      
+      
       templatePlantillaClon.querySelector(".aTarjeta").href = i.url;
 
       //Accedo al favicon de cualquier web
-      templatePlantillaClon.querySelector(".imagen").src =
-      "https://s2.googleusercontent.com/s2/favicons?domain=" + i.url + "&sz=32";
+      templatePlantillaClon.querySelector(".tarjetaIMG").src =
+        "https://s2.googleusercontent.com/s2/favicons?domain=" +
+        i.url +
+        "&sz=32";
+        if(i.title === "" ||i.title === " "){
+          
+          templatePlantillaClon.querySelector(".tituloTarjeta").classList.replace("tituloTarjeta","tituloTarjetaVacio")
+          
+        }
 
       fragmento.appendChild(templatePlantillaClon);
     }
-
-    
   });
-  arrayMarcadores = []
+  arrayMarcadores = [];
   mainContendor.innerHTML = "";
   mainContendor.appendChild(fragmento);
 }
 
-function insertarBotones(){
-  
+function insertarBotones() {
   const fragmento = document.createDocumentFragment();
-  arrayCarpetas.forEach(carpeta =>{
-    
-    const templateBotonesClon = templateBotones.content.cloneNode(true)
-    templateBotonesClon.querySelector(".botonesMenu").textContent = carpeta.title
-    templateBotonesClon.querySelector(".botonesMenu").id = carpeta.id
-    fragmento.appendChild(templateBotonesClon)
-
-  })
-  divBotones.appendChild(fragmento)
+  arrayCarpetas.forEach((carpeta) => {
+    const templateBotonesClon = templateBotones.content.cloneNode(true);
+    templateBotonesClon.querySelector(".botonesMenu").textContent =
+      carpeta.title;
+    templateBotonesClon.querySelector(".botonesMenu").id = carpeta.id;
+    fragmento.appendChild(templateBotonesClon);
+  });
+  divBotones.appendChild(fragmento);
 }
 
-function incertarMarcadoresDeCarpeta(carpeta){
+function incertarMarcadoresDeCarpeta(carpeta) {
+  carpeta.children.forEach((marcador) => {
+    arrayMarcadores.push(marcador);
+  });
 
-  carpeta.children.forEach(marcador =>{
-
-    arrayMarcadores.push(marcador)
-    
-  })
-
-  insertarMarcadores(arrayMarcadores)
+  insertarMarcadores(arrayMarcadores);
 }
 
 function peticionAPI() {
-
   //El metodo getTree me devuelve una promesa por lo que la almaceno en una variable y la analizo
   miPromesa = chrome.bookmarks.getTree();
   // Ejecutamos la promesa y accedemos al resultado del array
   miPromesa
     .then((resultado) => {
       //CarpetasPadres.OtrosMarcadores.Tools.ArrayConMarcadoresDeTools
-      
-      buscarCarpetasRaiz(resultado)
+
+      buscarCarpetasRaiz(resultado);
 
       // const arrayCarpeta =
       //   resultado[0].children[1].children[indexCarpeta].children;
@@ -84,122 +85,130 @@ function peticionAPI() {
     });
 }
 
-function buscarCarpetasRaiz(resultado){
-  
-  resultado.forEach(nodo =>{
-    
-    if(nodo.hasOwnProperty("children")){
-      nodo.children.forEach(carpetaRaiz =>{
-        
-        arrayCarpetasPendiente.push(carpetaRaiz)
-        
-      })
+function buscarCarpetasRaiz(resultado) {
+  resultado.forEach((nodo) => {
+    if (nodo.hasOwnProperty("children")) {
+      nodo.children.forEach((carpetaRaiz) => {
+        arrayCarpetasPendiente.push(carpetaRaiz);
+      });
     }
-  })
-  buscarCarpetasHijas()
+  });
+  buscarCarpetasHijas();
 }
 
-function buscarCarpetasHijas(){
-  
-  for (let carpetaRaiz = 0; carpetaRaiz<arrayCarpetasPendiente.length; carpetaRaiz++){
-    arrayCarpetasPendiente[carpetaRaiz].children.forEach(nodoHijo =>{
-      
-      if(nodoHijo.hasOwnProperty("children")){
-        arrayCarpetasPendiente.push(nodoHijo)
-        
+function buscarCarpetasHijas() {
+  for (
+    let carpetaRaiz = 0;
+    carpetaRaiz < arrayCarpetasPendiente.length;
+    carpetaRaiz++
+  ) {
+    arrayCarpetasPendiente[carpetaRaiz].children.forEach((nodoHijo) => {
+      if (nodoHijo.hasOwnProperty("children")) {
+        arrayCarpetasPendiente.push(nodoHijo);
       }
-    })
-    arrayCarpetas.push(arrayCarpetasPendiente[carpetaRaiz])
+    });
+    arrayCarpetas.push(arrayCarpetasPendiente[carpetaRaiz]);
   }
-  
-  insertarBotones()
-}
 
+  insertarBotones();
+}
 
 function insertarTodosMarcadores() {
   const fragmento = document.createDocumentFragment();
 
-  arrayCarpetas.forEach(carpeta =>{
-    carpeta.children.forEach(marcador =>{
-      
-      arrayMarcadores.push(marcador)
-    })
-  })
+  arrayCarpetas.forEach((carpeta) => {
+    carpeta.children.forEach((marcador) => {
+      arrayMarcadores.push(marcador);
+    });
+  });
 
-  insertarMarcadores()
-  
+  insertarMarcadores();
 }
 
-function buscar(titulo){
-
-  arrayCarpetas.forEach(carpeta =>{
-    carpeta.children.forEach(marcador =>{
-      
-      if(marcador.hasOwnProperty("url")){
-
-        if (marcador.title.toLowerCase().includes(titulo.toLowerCase())||marcador.url.toLowerCase().includes(titulo.toLowerCase())){
-          arrayMarcadores.push(marcador)
+function buscar(titulo) {
+  arrayCarpetas.forEach((carpeta) => {
+    carpeta.children.forEach((marcador) => {
+      if (marcador.hasOwnProperty("url")) {
+        if (
+          marcador.title.toLowerCase().includes(titulo.toLowerCase()) ||
+          marcador.url.toLowerCase().includes(titulo.toLowerCase())
+        ) {
+          arrayMarcadores.push(marcador);
         }
       }
+    });
+  });
 
-      
-    })
-  })
-  
-  insertarMarcadores()
+  insertarMarcadores();
+}
+
+function seleccionado(carpetaID) {
+  document.getElementById(carpetaID).classList.add("seleccionado");
+  if (BotSelecParaCambio !== null) {
+    document
+      .getElementById(BotSelecParaCambio)
+      .classList.remove("seleccionado");
+  }
+  BotSelecParaCambio = carpetaID;
 }
 
 //Implemeto la delegacion de eventos
 cuerpo.addEventListener("click", (evento) => {
-
   //BOTONES
-  if(evento.target.matches(".botonesMenu")){
-    
 
-    if(evento.target.id === "mostrarTodos"){
-      insertarTodosMarcadores() 
-
-    }else if(evento.target.id === "admin"){
-      chrome.tabs.create({ url: "chrome://bookmarks/" });
-
-    }else{
-      arrayCarpetas.forEach(carpeta =>{
-        if(carpeta.id === evento.target.id){
-          
-          incertarMarcadoresDeCarpeta(carpeta)
-        }
-      })
-    }
-    
+  if (evento.target.id === "mostrarTodos") {
+    insertarTodosMarcadores();
+    seleccionado("mostrarTodos");
+  } else if (evento.target.id === "admin") {
+    chrome.tabs.create({ url: "chrome://bookmarks/" });
+    seleccionado("admin");
+  } else {
+    arrayCarpetas.forEach((carpeta) => {
+      if (carpeta.id === evento.target.id) {
+        incertarMarcadoresDeCarpeta(carpeta);
+        seleccionado(carpeta.id);
+      }
+    });
   }
 
   //ABRIR MARCADOR
-  
+
   if (evento.target.matches(".aTarjeta")) {
-    
     chrome.tabs.create({ url: evento.target.href });
   }
 
-  if (evento.target.matches(".imagen") ||
-  evento.target.matches(".tituloTarjeta")){
-    
+  if (
+    evento.target.matches(".imagen") ||
+    evento.target.matches(".tituloTarjeta")
+  ) {
     chrome.tabs.create({ url: evento.target.parentNode.href });
   }
-
 });
 
+botonAbajoArriba.addEventListener("click", () => {
+  if (abajoArriba === "#arriba") {
+    abajoArriba = "#abajo";
+    botonAbajoArriba.href = abajoArriba;
+
+    
+    botonAbajoArriba.classList.add("rotar")
+  } else {
+    abajoArriba = "#arriba";
+    botonAbajoArriba.href = abajoArriba;
+    botonAbajoArriba.classList.remove("rotar")
+    
+    
+  }
+  
+});
 
 //BOTON BUSCAR
-inputBuscar.addEventListener("input", ()=>{
-
-  buscar(inputBuscar.value)
-})
-
-window.addEventListener("load", ()=>{
-  document.querySelector(".inputBuscar").focus()
+inputBuscar.addEventListener("input", () => {
+  buscar(inputBuscar.value);
 });
 
+window.addEventListener("load", () => {
+  document.querySelector(".inputBuscar").focus();
+});
 
-peticionAPI()
-  
-
+peticionAPI();

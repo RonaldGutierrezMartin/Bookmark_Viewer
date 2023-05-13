@@ -9,13 +9,14 @@
   </head>
 
   <body>
+    <a name="arriba" ></a>
     <header>
       <nav>
         <div class="botones">
           
           
-          <button class="botonesMenu" id="mostrarTodos">All</button>
-          <button class="botonesMenu" id="admin">Admin</button>
+          <button class="botonesMenu seleccionadoHover seleccionadoSalir" id="mostrarTodos">All</button>
+          <button class="botonesMenu seleccionadoHover seleccionadoSalir" id="admin">Admin</button>
           
         </div>
         <hr>
@@ -23,7 +24,7 @@
           
           <form action="" class="formulario">
             
-            <input type="text" class="inputBuscar" placeholder=" ">
+            <input type="text" class="inputBuscar seleccionadoHover seleccionadoSalir" placeholder=" ">
             
           </form>
           
@@ -33,16 +34,20 @@
     </header>
     <main>
       <template id="templateBotones">
-        <button class="botonesMenu" id=""></button>
+        <button class="botonesMenu seleccionadoHover seleccionadoSalir" id=""></button>
       </template>
       <template id="templatePlantilla">
-        <a href="" class="aTarjeta">
-          <img src="" alt="tool" class="imagen" />
+        <a href="" class="aTarjeta seleccionadoHover seleccionadoSalir ">
+          <img src="" alt="tool" class= "tarjetaIMG" />
           <p class="tituloTarjeta"></p>
         </a>
       </template>
       
     </main>
+
+    
+    <a href="#abajo" id="bajarSubir" class="seleccionadoSalir"><img src="img/flecha-izquierda-gris.png" alt="flecha" id="imgBajarSubir" ></a>
+    <a name="abajo" ></a>
     <script src="content_script.js"></script>
   </body>
 </html>

@@ -1,7 +1,8 @@
+html{
+    scroll-behavior: smooth;
+} 
 
 body{
-    
-    
     width: 450px;
     height: 600px;
     padding: 0px;
@@ -40,14 +41,14 @@ form{
     height: 30px;
     border-radius: 7px;
     padding: 0px 8px;
-    border: 1px solid rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(0, 0, 0, 0.1); 
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
-    /* background-color: rgb(255, 255, 255); */
-    font-size: 13px;
-    font-weight: bold;
+    
+    font-size: 15px;
+    font-weight: 10px;
     color: rgba(255, 255, 255,0.8);
     background-color: rgb(51, 50, 50);
-    letter-spacing: 1px;
+    letter-spacing: 0.7px; 
 }
 .inputBuscar::placeholder{
     
@@ -56,13 +57,7 @@ form{
     background-repeat: no-repeat;
     
 }
-.inputBuscar:focus{
-    box-shadow: 0px 0px 10px rgba(255, 255, 255,0.5);
-    
-}
-.inputBuscar:hover{
-    box-shadow: 0px 0px 10px rgba(255, 255, 255,0.5);
-}
+
 header{
     margin: 0px;
 }
@@ -74,7 +69,7 @@ nav .botones{
     display: flex;
     flex-direction: row;
     justify-content: center;
-    /* background-color: rgb(36, 36, 36); */
+    
     
 }
 main{
@@ -98,12 +93,10 @@ main{
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
 
 }
-a.aTarjeta:hover{
-   
-    box-shadow: 0px 0px 10px rgba(255, 255, 255,0.5);
-    
-}
-.aTarjeta img{
+
+
+
+.tarjetaIMG{
     
     width: 20px;
     height: 20px;
@@ -113,11 +106,20 @@ a.aTarjeta:hover{
     margin-right: 2.5px;
     
 }
-.aTarjeta p{
+
+.tituloTarjeta{
     color: rgb(224, 220, 220);
     word-wrap: break-word;
     margin-right: 5px;
-    margin-right: 2.5px;
+    margin-left: 2.5px;
+    font-weight: 500;
+    
+}
+.tituloTarjetaVacio{
+    color: rgb(224, 220, 220);
+    word-wrap: break-word;
+    background-color: aqua;
+    margin-left: 2.5px;
     font-weight: 500;
     
 }
@@ -134,8 +136,46 @@ a.aTarjeta:hover{
     color: white;
 
 }
-.botonesMenu:hover{
-    box-shadow: 0px 0px 10px rgba(255, 255, 255,0.5);
+
+
+.seleccionado{
+    box-shadow: 0px 0px 8px rgba(255, 255, 255,0.5);
+}
+.seleccionadoSalir{
+    transition: all 0.3s;
+}
+.seleccionadoHover:hover{
+    box-shadow: 0px 0px 8px rgba(255, 255, 255,0.5);
+    
+}
+
+#bajarSubir{
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    border-radius: 30px;
+    padding: 0px;
+
+}
+
+#imgBajarSubir{
+    margin: 0px;
+    background-color: rgba(255, 255, 255,0.8);  
+    border-radius: 30px;
+    width: 30px;
+    height: 30px;
+    
+    transform: rotate(270deg);
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5); 
+    
+}
+#imgBajarSubir:hover{
+    box-shadow: 0px 0px 8px rgba(255, 255, 255,0.5);
+}
+
+.rotar{
+    transform: rotate(180deg);
+    
 }
 
 
