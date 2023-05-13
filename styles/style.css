@@ -155,19 +155,19 @@ main{
     left: 10px;
     border-radius: 30px;
     padding: 0px;
-
+    
+    width: 30px;
+    height: 30px;
 }
 
 #imgBajarSubir{
     margin: 0px;
-    background-color: rgba(255, 255, 255,0.8);  
     border-radius: 30px;
     width: 30px;
     height: 30px;
-    
     transform: rotate(270deg);
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5); 
-    
+    transition: all 0.3s;
 }
 #imgBajarSubir:hover{
     box-shadow: 0px 0px 8px rgba(255, 255, 255,0.5);
