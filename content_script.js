@@ -5,7 +5,6 @@ const mainContendor = document.querySelector("main");
 const cuerpo = document.querySelector("body");
 const inputBuscar = document.querySelector(".inputBuscar");
 const aTarjeta = document.querySelector(".aTarjeta");
-
 const botonAbajoArriba = document.querySelector("#bajarSubir");
 
 let arrayCarpetas = [];
