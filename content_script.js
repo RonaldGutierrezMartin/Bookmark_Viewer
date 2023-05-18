@@ -177,7 +177,7 @@ cuerpo.addEventListener("click", (evento) => {
   }
 
   if (
-    evento.target.matches(".imagen") ||
+    evento.target.matches(".tarjetaIMG") ||
     evento.target.matches(".tituloTarjeta")
   ) {
     chrome.tabs.create({ url: evento.target.parentNode.href });
